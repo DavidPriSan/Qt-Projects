@@ -1,0 +1,7 @@
+--- QT ---
+
+slots -> funciones
+signals -> eventos
+
+ver donde se genera el exe -> project (menú izq)/kit/build
+para ejecutar el exe directamente hay que copiar los dll necesarios a la misma carpeta (están en Qt/versión/compilador/bin)
