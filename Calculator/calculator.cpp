@@ -6,6 +6,7 @@ bool divTrigger = false;
 bool multTrigger = false;
 bool addTrigger = false;
 bool subTrigger = false;
+double memVal = 0.0;
 
 Calculator::Calculator(QWidget *parent)
     : QMainWindow(parent)
@@ -41,6 +42,18 @@ Calculator::Calculator(QWidget *parent)
     // Asignar SLOT a cambio de signo
     connect(ui->changeSign, SIGNAL(released()), this,
             SLOT(ChangeNumberSign()));
+
+    // Asignar SLOT a botones de memoria
+    connect(ui->memAdd, SIGNAL(released()), this,
+            SLOT(MemEdit()));
+    connect(ui->memClear, SIGNAL(released()), this,
+            SLOT(MemEdit()));
+    connect(ui->memGet, SIGNAL(released()), this,
+            SLOT(MemGet()));
+
+    // Asignar SLOT a A/C
+    connect(ui->clear, SIGNAL(released()), this,
+            SLOT(Clear()));
 }
 
 Calculator::~Calculator()
@@ -118,4 +131,32 @@ void Calculator::ChangeNumberSign()
         double dblDisplayValueSign = -1 * dblDisplayValue; // Cambia el signo
         ui->display->setText(QString::number(dblDisplayValueSign)); // Muestra resultado
     }
+}
+
+void Calculator::MemEdit()
+{
+    // Obtener valor actual
+    QString displayVal = ui->display->text();
+    // Obtener botón presionado
+    QPushButton *button = (QPushButton *)sender();
+    QString butVal = button->text();
+    if(QString::compare(butVal, "M+", Qt::CaseInsensitive) == 0){ // Suma
+        memVal += displayVal.toDouble();
+    } else{ // Resta
+        memVal -= displayVal.toDouble();
+    }
+    ui->display->setText(""); // Limpia el display
+}
+
+void Calculator::MemGet()
+{
+    ui->display->setText(QString::number(memVal)); // Muestra lo almacenado en memoria
+}
+
+void Calculator::Clear()
+{
+    // Resetea memoria
+    calcVal = 0.0;
+    memVal = 0.0;
+    ui->display->setText(QString::number(0.0)); // Limpia el display
 }
