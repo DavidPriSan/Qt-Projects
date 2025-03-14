@@ -3,6 +3,12 @@
 
 #include <QMainWindow>
 #include <QList>
+#include <QFileDialog>
+#include <QDir>
+#include <QByteArray>
+#include <QColorDialog>
+#include <QInputDialog>
+#include <QMessageBox>
 
 class ScribbleArea;
 
