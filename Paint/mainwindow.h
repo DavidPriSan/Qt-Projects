@@ -9,8 +9,9 @@
 #include <QColorDialog>
 #include <QInputDialog>
 #include <QMessageBox>
-
-class ScribbleArea;
+#include <QImageWriter>
+#include <QCloseEvent>
+#include "scribblearea.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -50,6 +51,7 @@ private:
     QAction *penColorAct;
     QAction *penWidthAct;
     QAction *printAct;
+    QAction *exitAct;
     QAction *clearScreenAct;
     QAction *aboutAct;
     QAction *aboutQtAct;
